@@ -94,6 +94,19 @@
 
         L.control.geocoder('mapzen-ojSmatv').addTo(map);
 
+        // Get url parameters
+        var params = {};
+        window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+          params[key] = value;
+        });
+
+        if (params.layers) {
+          var activeLayers = params.layers.split(',').map(function(item) { // map function not supported in IE < 9
+            return layers[item];
+          });
+        }
+
+
         </script>
 
         </body>
