@@ -118,9 +118,10 @@
         var geocoderOptions = {
           expanded: true
         };
-
-        L.control.geocoder('mapzen-ojSmatv').addTo(map);
-
+        
+        if (snapshot === true) {
+          L.control.geocoder('mapzen-ojSmatv').addTo(map);
+        }
         </script>
 
         </body>
