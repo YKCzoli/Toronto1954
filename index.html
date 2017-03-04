@@ -42,18 +42,44 @@
 
         <script>
         /* **** Leaflet **** */
-        // google
-        // var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{maxZoom: 16, subdomains:['mt0','mt1','mt2','mt3']});
-        // mapbox
-        var mapboxSat = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoieWN6b2xpIiwiYSI6IjJkRURjVW8ifQ.VGeQDfYcDPlFWrr_1vD3cg')
+
+        layers = {
+          'mapboxSat': L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoieWN6b2xpIiwiYSI6IjJkRURjVW8ifQ.VGeQDfYcDPlFWrr_1vD3cg')
+        };
+
+        // Get url parameters
+        var params = {};
+        window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+          params[key] = value;
+        });
+
+        if (params.layers) {
+          var activeLayers = params.layers.split(',').map(function(item) { // map function not supported in IE < 9
+            return layers[item];
+          });
+        }
+
+        if (params.snapshot) {
+          var snapshot = (params.snapshot === "true");
+        }
+        else {
+          var snapshot = true;
+        }
 
         // Map
         var map = L.map('map', {
-            center: [43.653854, -79.384934],
-            zoom: 14,
+            center: [params.lat || 43.653854, params.lng || -79.384934],
+            zoom: params.zoom || 14,
+            dragging: snapshot,
+            touchZoom: snapshot,
+            scrollWheelZoom: snapshot,
+            keyboard: snapshot,
+            boxZoom: snapshot,
+            doubleZoom: snapshot,
+            zoomControl: snapshot,
             minZoom: 11,
             maxZoom: 16,
-            layers: [mapboxSat]
+            layers: activeLayers || [layers.mapboxSat]
         });
 
         // aws
@@ -86,26 +112,13 @@
 
 
         // Add sideBySide and layers
-        L.control.sideBySide(mapboxSat, lyr).addTo(map);
+        L.control.sideBySide(layers.mapboxSat, lyr).addTo(map);
 
         var geocoderOptions = {
           expanded: true
         };
 
         L.control.geocoder('mapzen-ojSmatv').addTo(map);
-
-        // Get url parameters
-        var params = {};
-        window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
-          params[key] = value;
-        });
-
-        if (params.layers) {
-          var activeLayers = params.layers.split(',').map(function(item) { // map function not supported in IE < 9
-            return layers[item];
-          });
-        }
-
 
         </script>
 
