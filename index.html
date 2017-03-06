@@ -12,6 +12,10 @@
             <!-- Load geocoding plugin after Leaflet -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.7.1/leaflet-geocoder-mapzen.css">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.7.1/leaflet-geocoder-mapzen.js"></script>
+            <script src="//cdn.maptiks.com/maptiks-leaflet.min.js"></script>
+            <script>
+              maptiks.trackcode='3f6a8dda-7073-46aa-828b-567da50c2e36';
+            </script>
 
             <style>
                 body { margin:0; padding:0; }
@@ -118,7 +122,7 @@
         var geocoderOptions = {
           expanded: true
         };
-        
+
         if (snapshot === true) {
           L.control.geocoder('mapzen-ojSmatv').addTo(map);
         }
