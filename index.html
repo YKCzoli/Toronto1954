@@ -9,9 +9,6 @@
             <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
             <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
             <script src="js/leaflet-side-by-side.min.js"></script>
-            <!-- Load geocoding plugin after Leaflet -->
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.7.1/leaflet-geocoder-mapzen.css">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.7.1/leaflet-geocoder-mapzen.js"></script>
             <script src="//cdn.maptiks.com/maptiks-leaflet.min.js"></script>
             <script>
               maptiks.trackcode='3f6a8dda-7073-46aa-828b-567da50c2e36';
@@ -118,14 +115,6 @@
 
         // Add sideBySide and layers
         L.control.sideBySide(layers.mapboxSat, lyr).addTo(map);
-
-        var geocoderOptions = {
-          expanded: true
-        };
-
-        if (snapshot === true) {
-          L.control.geocoder('mapzen-ojSmatv').addTo(map);
-        }
         </script>
 
         </body>
